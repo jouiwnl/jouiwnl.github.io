@@ -1,0 +1,60 @@
+<div class="main-wrapper">
+	<div class="container" ng-if="showCidades">
+		<div class="row">
+			<div class="col-sm">
+				<div class="weather-wrapper" ng-repeat="cidade in cidades">
+					<div class="weather-card">
+						<div class="weather-icon cloud"></div>
+						<h1>
+							{{cidade.temp}}°C
+						</h1>
+
+						<div class="card-information">
+							<span>Min temp: {{cidade.temp_min}}°C</span> <br>
+							<span>Max temp: {{cidade.temp_max}}°C</span> <br>
+							<span>Sens. Térmica: {{cidade.temp_feels_like}}°C</span>
+							
+							<div class="button-week" style="margin-left: 30px; margin-top: 10px;">
+								<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-week-information" ng-click="mostrarPrevisaoSemana(cidade.id)">Ver previsão semana</button>
+							</div>
+
+						</div>
+						<p>{{cidade.nome}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- modal-weather-week -->
+	<div class="modal fade" id="modal-week-information" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm">
+								1: {{cidade.temp_0}}°C 
+							</div>
+							<div class="col-sm">
+								2: {{cidade.temp_1}}°C 
+							</div>
+							<div class="col-sm">
+								3: {{cidade.temp_2}}°C 
+							</div>
+							<div class="col-sm">
+								4: {{cidade.temp_3}}°C 
+							</div>
+							<div class="col-sm">
+								5: {{cidade.temp_4}}°C
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer" style="text-align: center; display: block;">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Fechar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
