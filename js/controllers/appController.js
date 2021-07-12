@@ -1,7 +1,9 @@
 angular.module("appWeather").controller("appController", function($scope, weatherService, $q) {
 
+    $scope.showButtonCard = true;
     $scope.showSinglecity = false;
     $scope.showCidades = true;
+    $scope.showInfoCity = false;
 
     var cidades = [
         "criciuma",
@@ -53,11 +55,16 @@ angular.module("appWeather").controller("appController", function($scope, weathe
                 temp: (response.data.main.temp - 273.15).toFixed(0),
                 temp_max : (response.data.main.temp_max - 273.15).toFixed(0),
                 temp_min : (response.data.main.temp_min - 273.15).toFixed(0),
-                temp_feels_like : (response.data.main.feels_like - 273.15).toFixed(0) 
+                temp_feels_like : (response.data.main.feels_like - 273.15).toFixed(0),
+                wind : (response.data.wind.speed * 3.6).toFixed(0),
+                humidity : response.data.main.humidity,
+                pressure : response.data.main.pressure
+
             }
             console.log(response.data);
         })
     }
+
 
     $scope.buscarCidade = (cidadeNome) => {
         $scope.showCidades = false;
@@ -68,9 +75,18 @@ angular.module("appWeather").controller("appController", function($scope, weathe
         input.value = "";
     }
 
+    $scope.infoCidade = (nome) => {
+        $scope.showCidades = false;
+        $scope.showSinglecity = false;
+        $scope.showInfoCity = true;
+        $scope.loadSingle(nome);
+    }
+
     $scope.mostrarCidades = () => {
         $scope.showSinglecity = false;
+        $scope.showInfoCity = false;
         $scope.showCidades = true;
+        
     }
 
 });

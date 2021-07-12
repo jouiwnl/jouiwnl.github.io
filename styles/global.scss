@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900);
 
-$color1: #C8DAE6;
+$color1: #afbfc9;
 $color2: white;
 $color3: #B8B8B8;
 $color4: #FFCD41;
@@ -15,7 +15,6 @@ body {
 }
 
 .weather-wrapper {
-    margin-top: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -66,6 +65,20 @@ body {
         color: $color3;
         bottom: 0;
         margin-left: 30px;
+        opacity: 0;
+        transform: translateX(150px);
+        animation: title-appear 500ms ease-out 500ms forwards;   
+    }
+}
+
+.more-info {
+    padding: 30px;
+    span {
+        font-family: 'Lato', sans-serif;
+        font-weight:300;
+        font-size:15px;
+        color: $color3;
+        bottom: 0;
         opacity: 0;
         transform: translateX(150px);
         animation: title-appear 500ms ease-out 500ms forwards;   
@@ -366,4 +379,40 @@ body, input {
 .backward-on-hover:hover, .backward-on-hover:focus, .backward-on-hover:active {
   -webkit-transform: translateX(-8px);
   transform: translateX(-8px);
+}
+
+.weather-card-expanded {
+    
+    margin:  10px 5px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    width: 320px;
+    height: 500px;
+    background-color: $color2;
+    box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+    animation: appear 500ms ease-out forwards;
+    
+    h1 {
+        font-family: 'Lato', sans-serif;
+        font-weight:300;
+        font-size:50px;
+        color: $color3;
+        bottom: 0;
+        margin-left: 30px;
+        opacity: 0;
+        transform: translateX(150px);
+        animation: title-appear 500ms ease-out 500ms forwards;
+    }
+    
+    p {
+        position: absolute;
+        font-family: 'Lato', sans-serif;
+        font-weight: bold;
+        font-size:28px;
+        color: gray;
+        bottom: 0;
+        left: 35px;
+        animation: title-appear 1s ease-out 500ms forwards;
+    }
 }

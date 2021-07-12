@@ -23,7 +23,7 @@
 							<span>Sens. Térmica: {{cidade.temp_feels_like}}°C</span>
 							
 							<div class="button-week" style="margin-left: 30px; margin-top: 10px;">
-								<button type="button" class="btn btn-primary btn-sm">Ver previsão semana</button>
+								<button type="button" class="btn btn-primary btn-sm" ng-if="showButtonCard" ng-click="infoCidade(cidade.nome)">Ver mais detalhes</button>
 							</div>
 
 						</div>
@@ -55,10 +55,43 @@
 					<span>Sens. Térmica: {{cidade.temp_feels_like}}°C</span>
 					
 					<div class="button-week" style="margin-left: 30px; margin-top: 10px;">
-						<button type="button" class="btn btn-primary btn-sm" disabled>Ver previsão semana</button>
+						<button type="button" class="btn btn-primary btn-sm" ng-click="infoCidade(cidade.nome)">Ver mais detalhes</button>
 					</div>
 
 				</div>
+				<p>{{cidade.nome}}</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" ng-if="showInfoCity">
+
+		<div class="container" style="text-align: center;">
+			<a class="link backward-on-hover" ng-click="mostrarCidades()" style="font-size: 40px; cursor: pointer;"><i class="fas fa-long-arrow-alt-left"></i></a>
+		</div>
+
+		<div class="weather-wrapper" >
+			<div class="weather-card-expanded">
+				<div class="weather-icon">
+					<img style ="width: 90px" src={{cidade.icon}} alt="">
+				</div>
+				<h1>
+					{{cidade.temp}}°C
+				</h1>
+
+				<div class="card-information">
+					<span>Min temp: {{cidade.temp_min}}°C</span> <br>
+					<span>Max temp: {{cidade.temp_max}}°C</span> <br>
+					<span>Sens. Térmica: {{cidade.temp_feels_like}}°C</span>
+				</div>
+
+				<div class="more-info" style="display: flex; justify-content: space-between;">
+					<span>{{cidade.wind}}km/h <i class="fas fa-wind"></i></span>
+					<span>{{cidade.pressure}}Pa <i class="fas fa-level-down-alt"></i></span>
+					<span>{{cidade.humidity}}% <i class="fas fa-tint"></i></span>	
+
+				</div>
+
 				<p>{{cidade.nome}}</p>
 			</div>
 		</div>
