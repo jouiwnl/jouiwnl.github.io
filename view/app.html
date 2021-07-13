@@ -14,8 +14,8 @@
 
 	<div class="container" ng-if="showCidades">
 		<div class="header-wrapper" style="display:flex; justify-content: space-between; align-items: center; text-align: center;">
-			<div class="current-localization">
-				<button type="button" ng-click="buscarCidadeAtual()" class="btn btn-primary btn-sm"><i class="fas fa-map-marker-alt"></i></button>
+			<div class="current-localization" ng-click="buscarCidadeAtual()">
+				<button type="button" class="btn btn-primary btn-sm"><i class="fas fa-map-marker-alt"></i></button>
 			</div>
 			<form class="search-bar" style="padding: 0 20px;">
 				<input pattern=".*\S.*" required id="search-cidade">

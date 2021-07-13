@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900);
 body {
-  background-color: #cdd7de;
+  background-color: #e2eaef;
 }
 
 *, *:before, *:after {
@@ -138,12 +138,12 @@ body {
 
 .cloud {
   margin-right: 60px;
-  background: #a0b3bf;
+  background: #b1c6d4;
   border-radius: 20px;
   width: 25px;
   height: 25px;
-  -webkit-box-shadow: #a0b3bf 24px -6px 0 2px, #a0b3bf 10px 5px 0 5px, #a0b3bf 30px 5px 0 2px, #a0b3bf 11px -8px 0 -3px, #a0b3bf 25px 11px 0 -1px;
-          box-shadow: #a0b3bf 24px -6px 0 2px, #a0b3bf 10px 5px 0 5px, #a0b3bf 30px 5px 0 2px, #a0b3bf 11px -8px 0 -3px, #a0b3bf 25px 11px 0 -1px;
+  -webkit-box-shadow: #b1c6d4 24px -6px 0 2px, #b1c6d4 10px 5px 0 5px, #b1c6d4 30px 5px 0 2px, #b1c6d4 11px -8px 0 -3px, #b1c6d4 25px 11px 0 -1px;
+          box-shadow: #b1c6d4 24px -6px 0 2px, #b1c6d4 10px 5px 0 5px, #b1c6d4 30px 5px 0 2px, #b1c6d4 11px -8px 0 -3px, #b1c6d4 25px 11px 0 -1px;
 }
 
 .cloud:after {
@@ -199,7 +199,7 @@ body {
 
 .inspiration {
   margin-top: 80px;
-  color: #648294;
+  color: #6f96b0;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   font-size: 24px;
@@ -440,28 +440,6 @@ body, input {
           transform: translateY(1px);
 }
 
-@media screen and (prefers-color-scheme: dark) {
-  body, input {
-    color: #f1f1f1;
-  }
-  body {
-    background: #171717;
-  }
-  .search-bar input {
-    -webkit-box-shadow: 0 0 0 0.4em #f1f1f1 inset;
-            box-shadow: 0 0 0 0.4em #f1f1f1 inset;
-  }
-  .search-bar input:focus,
-  .search-bar input:valid {
-    background: #3d3d3d;
-    -webkit-box-shadow: 0 0 0 0.1em #3d3d3d inset;
-            box-shadow: 0 0 0 0.1em #3d3d3d inset;
-  }
-  .search-btn {
-    background: #f1f1f1;
-  }
-}
-
 .link:hover {
   text-decoration: none;
   color: #000;
@@ -561,7 +539,7 @@ ul {
       -ms-flex-align: center;
           align-items: center;
   min-height: 100vh;
-  background-color: #afbfc9;
+  background-color: #c1d2dd;
 }
 
 .planet {
