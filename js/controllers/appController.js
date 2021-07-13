@@ -1,9 +1,10 @@
 angular.module("appWeather").controller("appController", function($scope, weatherService, $q) {
 
     $scope.showButtonCard = true;
-    $scope.showSinglecity = false;
     $scope.showCidades = true;
+    $scope.showSinglecity = false;
     $scope.showInfoCity = false;
+    $scope.showLoading = false;
 
     //definindo cidades da tela principal
     var cidades = [
@@ -27,7 +28,10 @@ angular.module("appWeather").controller("appController", function($scope, weathe
     $scope.cidades = [];
     
     //monta o array de cidades da tela principal do app
-    for(let i = 0 ; i < cidades.length; i++){       
+    for(let i = 0 ; i < cidades.length; i++){    
+        $scope.showCidades = false;
+        $scope.showLoading = true;
+           
         var promisse = weatherService.findWeatherCity(cidades[i]).then((response) => {  
             console.log(response.data) 
 
@@ -47,9 +51,13 @@ angular.module("appWeather").controller("appController", function($scope, weathe
         promisses.push(promisse);
     } 
 
+
     //faz todas as promisses referentes ao array
     $q.all(promisses).then(function(results){
+        $scope.showLoading = true;
         $scope.cidades = results;
+        $scope.showLoading = false;
+        $scope.showCidades = true;
         console.log(results)
     }) 
     
@@ -133,11 +141,11 @@ angular.module("appWeather").controller("appController", function($scope, weathe
     //buscar cidade pelo input de pesquisa
     $scope.buscarCidade = (cidadeNome) => {
         $scope.showCidades = false;
-        $scope.showSinglecity = true;
         var input = document.querySelector("#search-cidade");
         var cidadeNome = input.value; 
         $scope.loadSingle(cidadeNome);
         input.value = "";
+        $scope.showSinglecity = true;
     }
 
     //ver informações de uma cidade já cadastrada
@@ -150,6 +158,8 @@ angular.module("appWeather").controller("appController", function($scope, weathe
 
     //botão de retornar a tela pincipal
     $scope.mostrarCidades = () => {
+        location.reload();
+        $scopw.showLoading = true;
         $scope.showSinglecity = false;
         $scope.showInfoCity = false;
         $scope.showCidades = true;

@@ -6,22 +6,25 @@
 
 </head>
 
+	<div class="planet-wrapper" ng-if="showLoading">
+		<div class="planet"></div>
+	</div>
+
 <div class="main-wrapper">
+
 	<div class="container" ng-if="showCidades">
-		<header>
-			<div class="header-wrapper" style="display:flex; justify-content: space-between; align-items: center; text-align: center;">
-				<div class="current-localization" style="margin-left: 90px;">
-					<button type="button" class="btn btn-primary btn-sm"><i class="fas fa-map-marker-alt" ng-click="buscarCidadeAtual()"></i></button>
-				</div>
-				<form class="search-bar" style="padding: 0 20px;">
-					<input pattern=".*\S.*" required id="search-cidade">
-					<button class="search-btn" ng-click="buscarCidade(nomeCidade)"></button>
-				</form>
-				<div style="margin-right: 90px; text-decoration: none; font-size: 40px;" class="github-user">
-					<a style="color: black;" href="https://github.com/jouiwnl/weather-angularjs"><i class="fab fa-github"></i></a>
-				</div>
+		<div class="header-wrapper" style="display:flex; justify-content: space-between; align-items: center; text-align: center;">
+			<div class="current-localization">
+				<button type="button" ng-click="buscarCidadeAtual()" class="btn btn-primary btn-sm"><i class="fas fa-map-marker-alt"></i></button>
 			</div>
-		</header>
+			<form class="search-bar" style="padding: 0 20px;">
+				<input pattern=".*\S.*" required id="search-cidade">
+				<button class="search-btn" ng-click="buscarCidade(nomeCidade)"></button>
+			</form>
+			<div style="text-decoration: none; font-size: 40px;" class="github-user">
+				<a style="color: black;" href="https://github.com/jouiwnl/weather-angularjs"><i class="fab fa-github"></i></a>
+			</div>
+		</div>
 
 		<div class="row">
 			<div class="col-sm" ng-repeat="cidade in cidades">
