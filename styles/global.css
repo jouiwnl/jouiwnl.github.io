@@ -530,4 +530,23 @@ body, input {
   -webkit-animation: title-appear 1s ease-out 500ms forwards;
           animation: title-appear 1s ease-out 500ms forwards;
 }
+
+ul {
+  display: none;
+}
+
+.map {
+  height: 150px;
+  width: 100%;
+}
+
+.container h3 {
+  color: gray;
+}
+
+.github-user a:hover {
+  opacity: 0.7;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
 /*# sourceMappingURL=global.css.map */

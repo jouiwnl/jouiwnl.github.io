@@ -1,10 +1,27 @@
+<head>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.0/css/ol.css" type="text/css">
+	<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.0/build/ol.js"></script>
+	<title>OpenLayers example</title>
+
+</head>
+
 <div class="main-wrapper">
 	<div class="container" ng-if="showCidades">
-
-		<form class="search-bar">
-			<input pattern=".*\S.*" required id="search-cidade">
-			<button class="search-btn" ng-click="buscarCidade(nomeCidade)"></button>
-		</form>
+		<header>
+			<div class="header-wrapper" style="display:flex; justify-content: space-between; align-items: center; text-align: center;">
+				<div class="current-localization" style="margin-left: 90px;">
+					<button type="button" class="btn btn-primary btn-sm"><i class="fas fa-map-marker-alt" ng-click="buscarCidadeAtual()"></i></button>
+				</div>
+				<form class="search-bar" style="padding: 0 20px;">
+					<input pattern=".*\S.*" required id="search-cidade">
+					<button class="search-btn" ng-click="buscarCidade(nomeCidade)"></button>
+				</form>
+				<div style="margin-right: 90px; text-decoration: none; font-size: 40px;" class="github-user">
+					<a style="color: black;" href="https://github.com/jouiwnl/weather-angularjs"><i class="fab fa-github"></i></a>
+				</div>
+			</div>
+		</header>
 
 		<div class="row">
 			<div class="col-sm" ng-repeat="cidade in cidades">
@@ -90,6 +107,13 @@
 					<span>{{cidade.pressure}}Pa <i class="fas fa-level-down-alt"></i></span>
 					<span>{{cidade.humidity}}% <i class="fas fa-tint"></i></span>	
 
+				</div>
+
+				<div class="container">
+					<h3>Localização</h3>
+					<div id="map" class="map">
+						{{cidade.mapa}}
+					</div>	
 				</div>
 
 				<p>{{cidade.nome}}</p>

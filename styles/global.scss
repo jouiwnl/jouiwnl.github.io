@@ -416,3 +416,25 @@ body, input {
         animation: title-appear 1s ease-out 500ms forwards;
     }
 }
+
+ul {
+    display: none; 
+}
+
+.map {
+    height: 150px;
+    width: 100%;
+}
+
+.container {
+    h3 {
+        color: gray;
+    }
+}
+
+.github-user {
+    a:hover {
+        opacity: 0.7;
+        transition: all 0.3s ease;
+    }
+}

@@ -10,4 +10,8 @@ angular.module("appWeather").service("weatherService", function($http, config) {
         return $http.get(config.apiUrl + "forecast?id=" + cityId + "&appid=" + apiKey);
     }
 
+    this.findByCoords = (lat, lon) => {
+        return $http.get(config.apiUrl + "weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey);
+    }
+
 });
