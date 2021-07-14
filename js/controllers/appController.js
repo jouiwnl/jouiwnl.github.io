@@ -39,6 +39,7 @@ angular.module("appWeather").controller("appController", function($scope, weathe
             var cidade = {
                 id: response.data.id,
                 icon:  "assets/icons/" + response.data.weather[0].icon + ".png",
+                backgrounds: "assets/backgrounds/" + response.data.weather[0].icon + ".jpg",
                 nome : response.data.name,
                 temp: (response.data.main.temp - 273.15).toFixed(0),
                 temp_max : (response.data.main.temp_max - 273.15).toFixed(0),
@@ -74,7 +75,7 @@ angular.module("appWeather").controller("appController", function($scope, weathe
                 ],
                 view: new ol.View({
                 center: ol.proj.fromLonLat([response.data.coord.lon, response.data.coord.lat]),
-                zoom: 11
+                zoom : 11.9
                 })
             });
 
@@ -82,6 +83,7 @@ angular.module("appWeather").controller("appController", function($scope, weathe
             $scope.cidade = {
                 id: response.data.id,
                 icon:  "assets/icons/" + response.data.weather[0].icon + ".png",
+                backgrounds: "assets/backgrounds/" + response.data.weather[0].icon + "large.jpg",
                 nome : response.data.name,
                 temp: (response.data.main.temp - 273.15).toFixed(0),
                 temp_max : (response.data.main.temp_max - 273.15).toFixed(0),
@@ -91,9 +93,8 @@ angular.module("appWeather").controller("appController", function($scope, weathe
                 humidity : response.data.main.humidity,
                 pressure : response.data.main.pressure,
                 mapa : map
-
             }
-            console.log(response.data);
+            console.log($scope.cidade.backgrounds);
         }).catch((error) => {
             alert("Cidade não encontrada")
             location.reload();
@@ -112,7 +113,7 @@ angular.module("appWeather").controller("appController", function($scope, weathe
                 ],
                 view: new ol.View({
                 center: ol.proj.fromLonLat([response.data.coord.lon, response.data.coord.lat]),
-                zoom: 11
+                zoom : 11.9
                 })
             });
 
@@ -120,6 +121,7 @@ angular.module("appWeather").controller("appController", function($scope, weathe
             $scope.cidade = {
                 id: response.data.id,
                 icon:  "assets/icons/" + response.data.weather[0].icon + ".png",
+                backgrounds: "assets/backgrounds/" + response.data.weather[0].icon + "large.jpg",
                 nome : response.data.name,
                 temp: (response.data.main.temp - 273.15).toFixed(0),
                 temp_max : (response.data.main.temp_max - 273.15).toFixed(0),
@@ -131,7 +133,7 @@ angular.module("appWeather").controller("appController", function($scope, weathe
                 mapa : map
 
             }
-            console.log(response.data);
+            console.log($scope.cidade);
         }).catch((error) => {
             alert("Cidade não encontrada")
             location.reload();

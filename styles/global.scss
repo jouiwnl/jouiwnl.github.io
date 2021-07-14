@@ -7,7 +7,7 @@ $color4: #FFCD41;
 $color5: #2092A9;
 
 body {
-    background-color: lighten($color1, 10%);
+    background-color: #c1d2dd;
 }
 
 *, *:before, *:after {
@@ -37,7 +37,7 @@ body {
         font-family: 'Lato', sans-serif;
         font-weight:300;
         font-size:50px;
-        color: $color3;
+        color: white;
         bottom: 0;
         margin-left: 30px;
         opacity: 0;
@@ -50,7 +50,7 @@ body {
         font-family: 'Lato', sans-serif;
         font-weight: bold;
         font-size:28px;
-        color: gray;
+        color: white;
         bottom: 0;
         left: 35px;
         animation: title-appear 1s ease-out 500ms forwards;
@@ -62,7 +62,7 @@ body {
         font-family: 'Lato', sans-serif;
         font-weight:300;
         font-size:15px;
-        color: $color3;
+        color: white;
         bottom: 0;
         margin-left: 30px;
         opacity: 0;
@@ -77,7 +77,7 @@ body {
         font-family: 'Lato', sans-serif;
         font-weight:300;
         font-size:15px;
-        color: $color3;
+        color: white;
         bottom: 0;
         opacity: 0;
         transform: translateX(150px);
@@ -370,7 +370,7 @@ body, input {
     overflow: hidden;
     width: 320px;
     height: 500px;
-    background-color: $color2;
+    background-repeat: no-repeat;
     box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
     animation: appear 500ms ease-out forwards;
     
@@ -378,7 +378,7 @@ body, input {
         font-family: 'Lato', sans-serif;
         font-weight:300;
         font-size:50px;
-        color: $color3;
+        color: white;
         bottom: 0;
         margin-left: 30px;
         opacity: 0;
@@ -391,7 +391,7 @@ body, input {
         font-family: 'Lato', sans-serif;
         font-weight: bold;
         font-size:28px;
-        color: gray;
+        color: white;
         bottom: 0;
         left: 35px;
         animation: title-appear 1s ease-out 500ms forwards;
@@ -409,7 +409,7 @@ ul {
 
 .container {
     h3 {
-        color: gray;
+        color: white;
     }
 }
 

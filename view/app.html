@@ -22,14 +22,14 @@
 				<button class="search-btn" ng-click="buscarCidade(nomeCidade)"></button>
 			</form>
 			<div style="text-decoration: none; font-size: 40px;" class="github-user">
-				<a style="color: black;" href="https://github.com/jouiwnl/weather-angularjs"><i class="fab fa-github"></i></a>
+				<a style="color: black;" href="https://github.com/jouiwnl/weather-angularjs" target="_blank"><i class="fab fa-github"></i></a>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-sm" ng-repeat="cidade in cidades">
-				<div class="weather-wrapper" >
-					<div class="weather-card">
+				<div class="weather-wrapper">
+					<div class="weather-card" ng-style="{'background-image': 'url(' + cidade.backgrounds + ')'}">
 						<div class="weather-icon">
 							<img style ="width: 90px" src={{cidade.icon}} alt="">
 						</div>
@@ -61,7 +61,7 @@
 		</div>
 
 		<div class="weather-wrapper" >
-			<div class="weather-card">
+			<div class="weather-card" ng-style="{'background-image': 'url(' + cidade.backgrounds + ')'}">
 				<div class="weather-icon">
 					<img style ="width: 90px" src={{cidade.icon}} alt="">
 				</div>
@@ -91,7 +91,7 @@
 		</div>
 
 		<div class="weather-wrapper" >
-			<div class="weather-card-expanded">
+			<div class="weather-card-expanded" ng-style="{'background-image': 'url(' + cidade.backgrounds + ')'}">
 				<div class="weather-icon">
 					<img style ="width: 90px" src={{cidade.icon}} alt="">
 				</div>
