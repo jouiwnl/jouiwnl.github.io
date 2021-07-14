@@ -33,7 +33,6 @@ angular.module("appWeather").controller("appController", function($scope, weathe
         $scope.showLoading = true;
            
         var promisse = weatherService.findWeatherCity(cidades[i]).then((response) => {  
-            console.log(response.data) 
 
             //monta o objeto de cidade da tela principal
             var cidade = {
@@ -59,7 +58,6 @@ angular.module("appWeather").controller("appController", function($scope, weathe
         $scope.cidades = results;
         $scope.showLoading = false;
         $scope.showCidades = true;
-        console.log(results)
     }) 
     
     //carrega apenas a cidade selecionada
@@ -94,7 +92,6 @@ angular.module("appWeather").controller("appController", function($scope, weathe
                 pressure : response.data.main.pressure,
                 mapa : map
             }
-            console.log($scope.cidade.backgrounds);
         }).catch((error) => {
             alert("Cidade não encontrada")
             location.reload();
@@ -133,7 +130,6 @@ angular.module("appWeather").controller("appController", function($scope, weathe
                 mapa : map
 
             }
-            console.log($scope.cidade);
         }).catch((error) => {
             alert("Cidade não encontrada")
             location.reload();
