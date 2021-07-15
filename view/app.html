@@ -2,7 +2,6 @@
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.0/css/ol.css" type="text/css">
 	<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.0/build/ol.js"></script>
-	<title>OpenLayers example</title>
 
 </head>
 
@@ -54,6 +53,7 @@
 		</div>
 	</div>
 
+	<!--
 	<div class="container" ng-if="showSinglecity">
 
 		<div class="container" style="text-align: center;">
@@ -83,44 +83,64 @@
 			</div>
 		</div>
 	</div>
+	-->
 
 	<div class="container" ng-if="showInfoCity">
 
 		<div class="container" style="text-align: center;">
 			<a class="link backward-on-hover" ng-click="mostrarCidades()" style="font-size: 40px; cursor: pointer;"><i class="fas fa-long-arrow-alt-left"></i></a>
 		</div>
-
-		<div class="weather-wrapper" >
-			<div class="weather-card-expanded" ng-style="{'background-image': 'url(' + cidade.backgrounds + ')'}">
-				<div class="weather-icon">
-					<img style ="width: 90px" src={{cidade.icon}} alt="">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm">
+					<div class="weather-wrapper" >
+						<div class="weather-card-expanded" ng-style="{'background-image': 'url(' + cidade.backgrounds + ')'}">
+							<div class="weather-icon">
+								<img style ="width: 90px" src={{cidade.icon}} alt="">
+							</div>
+							<h1>
+								{{cidade.temp}}°C
+							</h1>
+			
+							<div class="card-information">
+								<span>Min temp: {{cidade.temp_min}}°C</span> <br>
+								<span>Max temp: {{cidade.temp_max}}°C</span> <br>
+								<span>Sens. Térmica: {{cidade.temp_feels_like}}°C</span>
+							</div>
+			
+							<div class="more-info" style="display: flex; justify-content: space-between;">
+								<span>{{cidade.wind}}km/h <i class="fas fa-wind"></i></span>
+								<span>{{cidade.pressure}}Pa <i class="fas fa-level-down-alt"></i></span>
+								<span>{{cidade.humidity}}% <i class="fas fa-tint"></i></span>	
+			
+							</div>
+			
+							<div class="container">
+								<h3>Localização</h3>
+								<div id="map" class="map">
+									{{cidade.mapa}}
+								</div>	
+							</div>
+			
+							<p>{{cidade.nome}}</p>
+						</div>
+					</div>
 				</div>
-				<h1>
-					{{cidade.temp}}°C
-				</h1>
-
-				<div class="card-information">
-					<span>Min temp: {{cidade.temp_min}}°C</span> <br>
-					<span>Max temp: {{cidade.temp_max}}°C</span> <br>
-					<span>Sens. Térmica: {{cidade.temp_feels_like}}°C</span>
-				</div>
-
-				<div class="more-info" style="display: flex; justify-content: space-between;">
-					<span>{{cidade.wind}}km/h <i class="fas fa-wind"></i></span>
-					<span>{{cidade.pressure}}Pa <i class="fas fa-level-down-alt"></i></span>
-					<span>{{cidade.humidity}}% <i class="fas fa-tint"></i></span>	
-
-				</div>
-
-				<div class="container">
-					<h3>Localização</h3>
-					<div id="map" class="map">
-						{{cidade.mapa}}
-					</div>	
-				</div>
-
-				<p>{{cidade.nome}}</p>
+			</div>
+			<div class="weather-wrapper" style="height: 1px; background-color: lightslategray; margin-bottom: 7px;"></div>
+			<div class="row">
+				<div class="col-sm">
+					<div class="weather-wrapper">
+						<div class="card-next-day" ng-repeat="dia in cidade.previsaoSemana" ng-style="{'background-image': 'url(' + dia.background + ')'}">
+							<div class="info-wrapper" style="display:flex; flex-direction: row; justify-content: space-between; text-align: center;">
+									<span style="margin-top: 10px;">{{dia.nome_dia}}</span>
+									<span style="margin-right: 10px; margin-top: 6px;">{{dia.temp_day}}°C <img src={{dia.icon}} alt="" style="max-width: 40px; max-height: 40px;"></span>										
+							</div>
+						</div>
+					</div>
+				</div>				
 			</div>
 		</div>
+		
 	</div>
 </div>
