@@ -1,7 +1,7 @@
 angular.module("appWeather").controller("appController", function($scope, weatherService, $q) {
 
     $scope.showButtonCard = true;
-    $scope.showCidades = true;
+    $scope.showCidades = false;
     $scope.showSinglecity = false;
     $scope.showInfoCity = false;
     $scope.showLoading = false;
@@ -131,9 +131,11 @@ angular.module("appWeather").controller("appController", function($scope, weathe
     //carrega apenas a cidade selecionada
     $scope.loadSingle = (nome) => {
         weatherService.findWeatherCity(nome).then((response) => {
+            
+            promisseDiaSemana = [];
 
             this.buildMap(response.data.coord.lon, response.data.coord.lat);
-
+           
             //montar objeto da cidade
             $scope.cidade = {
                 id: response.data.id,
@@ -177,8 +179,12 @@ angular.module("appWeather").controller("appController", function($scope, weathe
     //carrega as cidades de acordo com a localização atual
     $scope.loadSingleByCoords = (lat, lon) => {
         weatherService.findByCoords(lat, lon).then((response) => {
-            //montar mapa segundo API
+
             this.buildMap(response.data.coord.lon, response.data.coord.lat);
+            
+            $scope.showLoading = true;
+            $scope.showInfoCity = true;
+            
 
             //montar objeto da cidade
             $scope.cidade = {
@@ -194,7 +200,7 @@ angular.module("appWeather").controller("appController", function($scope, weathe
                 humidity : response.data.main.humidity,
                 pressure : response.data.main.pressure,
             }
-
+            
             for(let i = 1 ; i < diaSemana.length; i++){    
                 
                 var promisse = weatherService.findFurther(response.data.coord.lat, response.data.coord.lon).then((res) => {
@@ -211,7 +217,12 @@ angular.module("appWeather").controller("appController", function($scope, weathe
             $q.all(promisseDiaSemana).then(function(results){
                 $scope.cidade.previsaoSemana = results;     
                 console.log($scope.cidade)
+                $scope.showLoading = false;
             })
+           
+            //montar mapa segundo API
+            
+            
         }).catch((error) => {
             alert("Cidade não encontrada")
             location.reload();
@@ -220,12 +231,12 @@ angular.module("appWeather").controller("appController", function($scope, weathe
 
     //buscar cidade pelo input de pesquisa
     $scope.buscarCidade = (cidadeNome) => {
-        $scope.showCidades = false;
+        $scope.showInfoCity = false;
         var input = document.querySelector("#search-cidade");
         var cidadeNome = input.value; 
         $scope.loadSingle(cidadeNome);
         input.value = "";
-        $scope.showInfoCity = true;
+        $scope.showSearchedCity = true;
     }
 
     //ver informações de uma cidade já cadastrada
@@ -238,14 +249,21 @@ angular.module("appWeather").controller("appController", function($scope, weathe
 
     //botão de retornar a tela pincipal
     $scope.mostrarCidades = () => {
-        location.reload();
-        $scopw.showLoading = true;
         $scope.showSinglecity = false;
         $scope.showInfoCity = false;
+        $scope.loadData();
         $scope.showCidades = true;
         $scope.cidade = {};
     }
 
+    $scope.backPage = () => {
+        $scope.showSearchedCity = false;
+        $scope.showInfoCity = true;
+    }
+
+    $scope.refreshPage = () => {
+        location.reload();
+    }    
     //busca as cidades via geolocalização
     $scope.buscarCidadeAtual = () => {
         if (navigator.geolocation) {
@@ -260,5 +278,5 @@ angular.module("appWeather").controller("appController", function($scope, weathe
         }
     }
 
-    $scope.loadData();
+    $scope.buscarCidadeAtual();
 });
