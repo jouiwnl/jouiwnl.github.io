@@ -1,10 +1,12 @@
 angular.module("appWeather").controller("appController", function($scope, weatherService, $q) {
 
+    $scope.showFullCurrentCity = true;
     $scope.showButtonCard = true;
     $scope.showCidades = false;
     $scope.showSinglecity = false;
     $scope.showInfoCity = false;
     $scope.showLoading = false;
+    
 
     //definindo cidades da tela principal
     var cidades = [
@@ -36,6 +38,7 @@ angular.module("appWeather").controller("appController", function($scope, weathe
     //array de promisses para o callback posterior
     var promisses = [];
     var promisseDiaSemana = [];
+    var promisseHoras = [];
 
     //Arrays
     $scope.cidades = [];
@@ -73,7 +76,7 @@ angular.module("appWeather").controller("appController", function($scope, weathe
     this.buildWeekPrevision = (res, i) => {
 
         var dataFormatada = new Date((res.data.daily[i].dt)*1000).getDay();
-        var dia = diaSemana[dataFormatada]; 
+        var dia = diaSemana[dataFormatada];
 
         var previsaoSemana = {
             humidity: res.data.daily[i].humidity,
@@ -170,6 +173,34 @@ angular.module("appWeather").controller("appController", function($scope, weathe
                 $scope.cidade.previsaoSemana = results;     
                 console.log($scope.cidade)
             })
+
+
+             //PROMISSE DE HORAS
+            for(let i = 0 ; i < 8; i++){    
+                
+                var promisse = weatherService.findFurtherHours(response.data.coord.lat, response.data.coord.lon).then((res) => {
+
+                    var horaFormatada = new Date((res.data.hourly[i].dt)*1000).getHours();
+
+                    var previsaoHora = {
+                        temp : (res.data.hourly[i].temp - 273.15).toFixed(0),
+                        icon : "assets/icons/" + res.data.hourly[i].weather[0].icon + ".png",
+                        hora : horaFormatada + ":00"
+                    }
+    
+                    return previsaoHora
+                })
+                //adiciona no array de promisses cada dia da semana
+                promisseHoras.push(promisse);    
+            }
+
+            $q.all(promisseHoras).then(function(results){
+                $scope.cidade.previsaoHora = results;  
+                console.log($scope.cidade)   
+            });
+
+            promisseHoras = [];
+
         }).catch((error) => {
             alert(error)
             location.reload();
@@ -179,7 +210,7 @@ angular.module("appWeather").controller("appController", function($scope, weathe
     //carrega as cidades de acordo com a localização atual
     $scope.loadSingleByCoords = (lat, lon) => {
         weatherService.findByCoords(lat, lon).then((response) => {
-
+            //montar mapa segundo API
             this.buildMap(response.data.coord.lon, response.data.coord.lat);
             
             $scope.showLoading = true;
@@ -216,13 +247,35 @@ angular.module("appWeather").controller("appController", function($scope, weathe
 
             $q.all(promisseDiaSemana).then(function(results){
                 $scope.cidade.previsaoSemana = results;     
-                console.log($scope.cidade)
                 $scope.showLoading = false;
-            })
+            });
            
-            //montar mapa segundo API
-            
-            
+            //PROMISSE DE HORAS
+            for(let i = 0 ; i < 8; i++){    
+                
+                var promisse = weatherService.findFurtherHours(response.data.coord.lat, response.data.coord.lon).then((res) => {
+
+                    var horaFormatada = new Date((res.data.hourly[i].dt)*1000).getHours();
+
+                    var previsaoHora = {
+                        temp : (res.data.hourly[i].temp - 273.15).toFixed(0),
+                        icon : "assets/icons/" + res.data.hourly[i].weather[0].icon + ".png",
+                        hora : horaFormatada + ":00"
+                    }
+    
+                    return previsaoHora
+                })
+                //adiciona no array de promisses cada dia da semana
+                promisseHoras.push(promisse);    
+            }
+
+            $q.all(promisseHoras).then(function(results){
+                $scope.cidade.previsaoHora = results;  
+                console.log($scope.cidade)   
+            });
+
+            promisseHoras = [];
+
         }).catch((error) => {
             alert("Cidade não encontrada")
             location.reload();

@@ -10,6 +10,10 @@ angular.module("appWeather").service("weatherService", function($http, config) {
         return $http.get(config.apiUrl + "onecall?lat=" + lat + "&lon=" + lon + "&exclude=current,minutely,hourly,alerts&appid=" + apiKey);
     }
 
+    this.findFurtherHours = (lat, lon) => {
+        return $http.get(config.apiUrl + "onecall?lat=" + lat + "&lon=" + lon + "&exclude=current,minutely,daily,alerts&appid=" + apiKey);
+    }
+
     this.findByCoords = (lat, lon) => {
         return $http.get(config.apiUrl + "weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey);
     }
