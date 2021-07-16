@@ -1,4 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900);
+.container {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
 body {
   background-color: #c1d2dd;
 }
@@ -9,9 +14,6 @@ body {
 }
 
 .weather-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -24,13 +26,13 @@ body {
 }
 
 .weather-card {
-  margin: 20px 5px;
-  border-radius: 20px;
   position: relative;
   overflow: hidden;
-  width: 270px;
+  min-width: 300px;
   height: 270px;
   background-color: white;
+  background-repeat: no-repeat;
+  background-size: cover;
   -webkit-box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
           box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
   -webkit-animation: appear 500ms ease-out forwards;
@@ -470,11 +472,9 @@ body, input {
 }
 
 .weather-card-expanded {
-  margin: 10px 5px;
-  border-radius: 20px;
   position: relative;
   overflow: hidden;
-  width: 320px;
+  width: 100vw;
   height: 500px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -511,12 +511,9 @@ body, input {
 }
 
 .card-next-day {
-  margin-bottom: 8px;
-  margin-right: 5px;
-  border-radius: 20px;
   position: relative;
   overflow: hidden;
-  width: 320px;
+  width: 100vw;
   height: 50px;
   background-repeat: no-repeat;
   background-size: cover;

@@ -9,11 +9,12 @@
 		<div class="planet"></div>
 	</div>
 
-<div class="main-wrapper">
+<div class="main-wrapper" style="padding: 0;">
 
-	<div class="container" ng-if="showCidades">
-		<div class="header-wrapper" style="display:flex; justify-content: space-between; align-items: center; text-align: center;">
-			<div class="current-localization" ng-click="buscarCidadeAtual()">
+	<div class="container-fluid" ng-if="showCidades" style="padding-left: 0;">
+
+		<div class="header-wrapper" style="margin-right:auto; display:flex; justify-content: space-between; align-items: center; ">
+			<div class="current-localization" style="padding-left: 7px" ng-click="buscarCidadeAtual()">
 				<button type="button" class="btn btn-primary btn-sm"><i class="fas fa-map-marker-alt"></i></button>
 			</div>
 			<form class="search-bar" style="padding: 0 20px;">
@@ -26,7 +27,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-sm" ng-repeat="cidade in cidades">
+			<div class="col-sm" style="padding:0;" ng-repeat="cidade in cidades">
 				<div class="weather-wrapper">
 					<div class="weather-card" ng-style="{'background-image': 'url(' + cidade.backgrounds + ')'}">
 						<div class="weather-icon">
@@ -85,14 +86,15 @@
 	</div>
 	-->
 
-	<div class="container" ng-if="showInfoCity">
 
-		<div class="container" style="text-align: center;">
+	<div class="container-fluid" ng-if="showInfoCity">
+
+		<div class="header-wrapper" style="text-align: center;">
 			<a class="link backward-on-hover" ng-click="mostrarCidades()" style="font-size: 40px; cursor: pointer;"><i class="fas fa-long-arrow-alt-left"></i></a>
 		</div>
-		<div class="container">
+		<div class="weather-info" style="padding: 0;">
 			<div class="row">
-				<div class="col-sm">
+				<div class="col-sm" style="padding: 0;">
 					<div class="weather-wrapper" >
 						<div class="weather-card-expanded" ng-style="{'background-image': 'url(' + cidade.backgrounds + ')'}">
 							<div class="weather-icon">
@@ -127,9 +129,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="weather-wrapper" style="height: 1px; background-color: lightslategray; margin-bottom: 7px;"></div>
+			
 			<div class="row">
-				<div class="col-sm">
+				<div class="col-sm" style="padding: 0;">
 					<div class="weather-wrapper">
 						<div class="card-next-day" ng-repeat="dia in cidade.previsaoSemana" ng-style="{'background-image': 'url(' + dia.background + ')'}">
 							<div class="info-wrapper" style="display:flex; flex-direction: row; justify-content: space-between; text-align: center;">
@@ -138,7 +140,8 @@
 							</div>
 						</div>
 					</div>
-				</div>				
+				</div>
+				<div class="weather-wrapper" style="height: 1px; background-color: lightslategray; margin-bottom: 7px;"></div>				
 			</div>
 		</div>
 		

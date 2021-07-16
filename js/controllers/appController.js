@@ -21,6 +21,7 @@ angular.module("appWeather").controller("appController", function($scope, weathe
         "sao paulo"
     ]
 
+    //definindo dias da semana 
     var diaSemana = [
         "Domingo",
         "Segunda-feira",
@@ -36,10 +37,11 @@ angular.module("appWeather").controller("appController", function($scope, weathe
     var promisses = [];
     var promisseDiaSemana = [];
 
-    //Array
+    //Arrays
     $scope.cidades = [];
     $scope.previsaoDiaSemana = [];
 
+    //monta o mapa de localizao segundo padrão da API
     this.buildMap = (long, lat) => {
         var map = new ol.Map({
             target: 'map',
@@ -66,7 +68,31 @@ angular.module("appWeather").controller("appController", function($scope, weathe
         });
         map.addLayer(layer);
     }
+
+    //carrega a previsão da semana 
+    this.buildWeekPrevision = (res, i) => {
+
+        var dataFormatada = new Date((res.data.daily[i].dt)*1000).getDay();
+        var dia = diaSemana[dataFormatada]; 
+
+        var previsaoSemana = {
+            humidity: res.data.daily[i].humidity,
+            pressure: res.data.daily[i].pressure,
+            background : "assets/backgrounds/" + res.data.daily[i].weather[0].icon + "large.jpg",
+            temp_day : (res.data.daily[i].temp.day - 273.15).toFixed(0),
+            temp_evening : (res.data.daily[i].temp.eve - 273.15).toFixed(0),
+            temp_max : (res.data.daily[i].temp.max - 273.15).toFixed(0),
+            temp_min : (res.data.daily[i].temp.min - 273.15).toFixed(0),
+            temp_night : (res.data.daily[i].temp.night - 273.15).toFixed(0),
+            icon : "assets/icons/" + res.data.daily[i].weather[0].icon + ".png",
+            wind_speed : (res.data.daily[i].wind_speed * 3.6).toFixed(0),
+            nome_dia: dia
+        }
+
+        return previsaoSemana;
+    }
     
+    //carrega os dados iniciais da aplicação
     $scope.loadData = () => {
         //monta o array de cidades da tela principal do app
         for(let i = 0 ; i < cidades.length; i++){    
@@ -127,24 +153,11 @@ angular.module("appWeather").controller("appController", function($scope, weathe
             for(let i = 1 ; i < diaSemana.length; i++){    
                 
                 var promisse = weatherService.findFurther(response.data.coord.lat, response.data.coord.lon).then((res) => {
-                    var dataFormatada = new Date((res.data.daily[i].dt)*1000).getDay();
-                    var dia = diaSemana[dataFormatada]; 
+                    
+                   var previsaoSemana = this.buildWeekPrevision(res, i);
 
-                    var previsaoSemana = {
-                        humidity: res.data.daily[i].humidity,
-                        pressure: res.data.daily[i].pressure,
-                        background : "assets/backgrounds/" + res.data.daily[i].weather[0].icon + "large.jpg",
-                        temp_day : (res.data.daily[i].temp.day - 273.15).toFixed(0),
-                        temp_evening : (res.data.daily[i].temp.eve - 273.15).toFixed(0),
-                        temp_max : (res.data.daily[i].temp.max - 273.15).toFixed(0),
-                        temp_min : (res.data.daily[i].temp.min - 273.15).toFixed(0),
-                        temp_night : (res.data.daily[i].temp.night - 273.15).toFixed(0),
-                        icon : "assets/icons/" + res.data.daily[i].weather[0].icon + ".png",
-                        wind_speed : (res.data.daily[i].wind_speed * 3.6).toFixed(0),
-                        nome_dia: dia
-                    }
+                   return previsaoSemana
 
-                    return previsaoSemana;
                 })
                 //adiciona no array de promisses cada dia da semana
                 promisseDiaSemana.push(promisse);
@@ -161,6 +174,7 @@ angular.module("appWeather").controller("appController", function($scope, weathe
         })
     }
 
+    //carrega as cidades de acordo com a localização atual
     $scope.loadSingleByCoords = (lat, lon) => {
         weatherService.findByCoords(lat, lon).then((response) => {
             //montar mapa segundo API
@@ -180,6 +194,24 @@ angular.module("appWeather").controller("appController", function($scope, weathe
                 humidity : response.data.main.humidity,
                 pressure : response.data.main.pressure,
             }
+
+            for(let i = 1 ; i < diaSemana.length; i++){    
+                
+                var promisse = weatherService.findFurther(response.data.coord.lat, response.data.coord.lon).then((res) => {
+                    
+                    var previsaoSemana = this.buildWeekPrevision(res, i);
+    
+                    return previsaoSemana
+                })
+                //adiciona no array de promisses cada dia da semana
+                promisseDiaSemana.push(promisse);
+                
+            }
+
+            $q.all(promisseDiaSemana).then(function(results){
+                $scope.cidade.previsaoSemana = results;     
+                console.log($scope.cidade)
+            })
         }).catch((error) => {
             alert("Cidade não encontrada")
             location.reload();
