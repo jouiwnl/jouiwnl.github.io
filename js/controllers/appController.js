@@ -256,11 +256,6 @@ angular.module("appWeather").controller("appController", function($scope, weathe
         $scope.cidade = {};
     }
 
-    $scope.backPage = () => {
-        $scope.showSearchedCity = false;
-        $scope.showInfoCity = true;
-    }
-
     $scope.refreshPage = () => {
         location.reload();
     }    
